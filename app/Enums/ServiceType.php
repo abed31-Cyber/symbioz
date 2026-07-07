@@ -2,32 +2,28 @@
 
 namespace App\Enums;
 
-/**
- * Enumération représentant les types de prestations.
- */
 enum ServiceType: string
 {
-    case Plomberie = 'plomberie';
-    case Electricite = 'electricite';
-    case Peinture = 'peinture';
-    case Platrerie = 'platrerie';
-    case Menuiserie = 'menuiserie';
+    case PAINTING = 'painting';
+    case PLASTERING = 'plastering';
+    case PLUMBING = 'plumbing';
+    case ELECTRICITY = 'electricity';
+    case CARPENTRY = 'carpentry'; // Menuiserie
 
     /**
-     * Les label en français pour affichage (vues, emails).
+     * Récupérer le libellé en français pour l'affichage.
      */
     public function label(): string
     {
         return match($this) {
-            self::Plomberie => 'Plomberie',
-            self::Electricite => 'Électricité',
-            self::Peinture => 'Peinture',
-            self::Platrerie => 'Plâtrerie',
-            self::Menuiserie => 'Menuiserie',
+            self::PAINTING => 'Peinture',
+            self::PLASTERING => 'Plâtrerie / Isolation',
+            self::PLUMBING => 'Plomberie',
+            self::ELECTRICITY => 'Électricité',
+            self::CARPENTRY => 'Menuiserie',
         };
     }
 }
-
 /**
  * Pourquoi utilise-t-on des Enums ? on verrouille les valeurs possibles en base de données et dans le code.
  * J’ai encapsulé les statuts et les types de prestations dans des Enums PHP natifs.
