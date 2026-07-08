@@ -9,3 +9,10 @@ export default defineConfig({
         }),
     ],
 });
+
+/**
+ * Configuration pour Vite
+ *
+ *
+ *
+ */
