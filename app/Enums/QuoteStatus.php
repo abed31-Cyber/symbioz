@@ -14,7 +14,7 @@ enum QuoteStatus: string
      */
     public function label(): string
     {
-        return match($this) {
+        return match ($this) {
             self::Nouveau => 'Nouveau',
             self::EnCours => 'En cours',
             self::Traite => 'Traité',
@@ -27,7 +27,7 @@ enum QuoteStatus: string
      */
     public function color(): string
     {
-        return match($this) {
+        return match ($this) {
             self::Nouveau => 'blue',
             self::EnCours => 'yellow',
             self::Traite => 'green',

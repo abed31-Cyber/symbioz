@@ -12,6 +12,8 @@ enum ServiceType: string
 
     /**
      * Libellé français pour affichage (vues, emails).
+     *
+     *  <p> Type de presta : {{$quote->service_type->label()}}</p>
      */
     public function label(): string
     {
