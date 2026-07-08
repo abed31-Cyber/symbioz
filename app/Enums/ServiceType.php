@@ -2,27 +2,57 @@
 
 namespace App\Enums;
 
+/**
+ * Types de service proposés par SYMBIOZ (BTP second œuvre).
+ * Valeurs stockées en base en français (cf. MPD), identifiants de case en PascalCase.
+ */
 enum ServiceType: string
 {
-    case Plomberie = 'plomberie';
+    case Plomberie   = 'plomberie';
     case Electricite = 'electricite';
-    case Peinture = 'peinture';
-    case Platrerie = 'platrerie';
-    case Menuiserie = 'menuiserie';
+    case Peinture    = 'peinture';
+    case Platrerie   = 'platrerie';
+    case Menuiserie  = 'menuiserie';
 
     /**
-     * Libellé français pour affichage (vues, emails).
-     *
-     *  <p> Type de presta : {{$quote->service_type->label()}}</p>
+     * Libellé affiché à l'utilisateur (francophone).
      */
     public function label(): string
     {
-        return match($this) {
-            self::Plomberie => 'Plomberie',
+        return match ($this) {
+            self::Plomberie   => 'Plomberie',
             self::Electricite => 'Électricité',
-            self::Peinture => 'Peinture',
-            self::Platrerie => 'Plâtrerie',
-            self::Menuiserie => 'Menuiserie',
+            self::Peinture    => 'Peinture',
+            self::Platrerie   => 'Plâtrerie',
+            self::Menuiserie  => 'Menuiserie',
+        };
+    }
+
+    /**
+     * Icône (emoji) utilisée sur la vitrine.
+     */
+    public function icon(): string
+    {
+        return match ($this) {
+            self::Plomberie   => '🔧',
+            self::Electricite => '⚡',
+            self::Peinture    => '🎨',
+            self::Platrerie   => '🧱',
+            self::Menuiserie  => '🪵',
+        };
+    }
+
+    /**
+     * Description courte présentée sur la page d'accueil et la page services.
+     */
+    public function description(): string
+    {
+        return match ($this) {
+            self::Plomberie   => 'Fuites, robinetterie, installation sanitaire et dépannage.',
+            self::Electricite => 'Mise aux normes, tableaux, prises et éclairage.',
+            self::Peinture    => 'Murs, plafonds, boiseries : finitions intérieures soignées.',
+            self::Platrerie   => 'Cloisons, doublages, enduits et faux plafonds.',
+            self::Menuiserie  => 'Pose de portes, fenêtres, parquets et aménagements sur mesure.',
         };
     }
 }
