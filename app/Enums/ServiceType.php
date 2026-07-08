@@ -4,23 +4,23 @@ namespace App\Enums;
 
 enum ServiceType: string
 {
-    case PAINTING = 'painting';
-    case PLASTERING = 'plastering';
-    case PLUMBING = 'plumbing';
-    case ELECTRICITY = 'electricity';
-    case CARPENTRY = 'carpentry'; // Menuiserie
+    case Plomberie = 'plomberie';
+    case Electricite = 'electricite';
+    case Peinture = 'peinture';
+    case Platrerie = 'platrerie';
+    case Menuiserie = 'menuiserie';
 
     /**
-     * Récupérer le libellé en français pour l'affichage.
+     * Libellé français pour affichage (vues, emails).
      */
     public function label(): string
     {
         return match($this) {
-            self::PAINTING => 'Peinture',
-            self::PLASTERING => 'Plâtrerie / Isolation',
-            self::PLUMBING => 'Plomberie',
-            self::ELECTRICITY => 'Électricité',
-            self::CARPENTRY => 'Menuiserie',
+            self::Plomberie => 'Plomberie',
+            self::Electricite => 'Électricité',
+            self::Peinture => 'Peinture',
+            self::Platrerie => 'Plâtrerie',
+            self::Menuiserie => 'Menuiserie',
         };
     }
 }

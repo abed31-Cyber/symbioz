@@ -34,7 +34,7 @@ class QuickRequestFactory extends Factory
             'description' => $this->faker->text(200),
             'status' => $status,
             'admin_notes' => $this->faker->optional(0.3)->sentence(),
-            'lost_reason' => $status === QuoteStatus::LOST ? $this->faker->sentence() : null,
+            'lost_reason' => $status === QuoteStatus::Perdu ? $this->faker->sentence() : null,
             'created_at' => $this->faker->dateTimeBetween('-2 weeks', 'now'), // Plus récent car "urgent"
         ];
     }

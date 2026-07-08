@@ -4,34 +4,34 @@ namespace App\Enums;
 
 enum QuoteStatus: string
 {
-    case NEW = 'new';
-    case IN_PROGRESS = 'in_progress';
-    case TREATED = 'treated';
-    case LOST = 'lost';
+    case Nouveau = 'nouveau';
+    case EnCours = 'en_cours';
+    case Traite = 'traite';
+    case Perdu = 'perdu';
 
     /**
-     * Récupérer le libellé en français pour l'affichage.
+     * Libellé français pour affichage.
      */
     public function label(): string
     {
         return match($this) {
-            self::NEW => 'Nouveau',
-            self::IN_PROGRESS => 'En cours',
-            self::TREATED => 'Traité',
-            self::LOST => 'Perdu',
+            self::Nouveau => 'Nouveau',
+            self::EnCours => 'En cours',
+            self::Traite => 'Traité',
+            self::Perdu => 'Perdu',
         };
     }
 
     /**
-     * Récupérer la classe de couleur Tailwind pour les badges admin.
+     * Couleur Tailwind pour le badge de statut (composant StatusBadge).
      */
     public function color(): string
     {
         return match($this) {
-            self::NEW => 'bg-blue-100 text-blue-800',
-            self::IN_PROGRESS => 'bg-warning-100 text-warning-800', // Adaptable selon ta charte Tailwind
-            self::TREATED => 'bg-green-100 text-green-800',
-            self::LOST => 'bg-red-100 text-red-800',
+            self::Nouveau => 'blue',
+            self::EnCours => 'yellow',
+            self::Traite => 'green',
+            self::Perdu => 'red',
         };
     }
 }

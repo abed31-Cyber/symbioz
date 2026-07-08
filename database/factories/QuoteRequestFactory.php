@@ -35,7 +35,7 @@ class QuoteRequestFactory extends Factory
             'status' => $status,
             'admin_notes' => fake()->optional()->sentence(),
             // lost_reason obligatoire seulement si status=perdu (RG-2)
-            'lost_reason' => $status === QuoteStatus::LOST ? fake()->sentence() : null,
+            'lost_reason' => $status === QuoteStatus::Perdu ? fake()->sentence() : null,
             'created_at' => fake()->dateTimeBetween('-2 months', 'now'),
         ];
     }

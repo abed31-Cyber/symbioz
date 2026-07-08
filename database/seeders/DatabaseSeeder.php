@@ -37,4 +37,6 @@ class DatabaseSeeder extends Seeder
 /* Pour tester que tout ton circuit de données (Migrations + Enums + Models + Factories + Seeder) fonctionne parfaitement,
 on exécute la commande de réinitialisation complète :
 sail artisan migrate:fresh --seed
-Cette commande vide toutes les tables, rejoue les migrations, puis exécute le Seeder). */
+Cette commande vide toutes les tables, rejoue les migrations, puis exécute le Seeder).
+migrate:fresh supprime toutes les tables et rejoue les migrations, --seed lance le seeder juste après.
+ Base propre + peuplée en une commande.*/
