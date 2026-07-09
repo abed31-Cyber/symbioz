@@ -145,43 +145,139 @@
         </div>
     </section>
 
-    {{-- ===================== SERVICES (6 métiers) ===================== --}}
-    {{-- TODO : prochaine itération --}}
-    <section class="py-16">
+   {{-- ===================== SERVICES (6 métiers) ===================== --}}
+    <section id="services" class="py-16">
         <div class="mx-auto max-w-7xl px-4 lg:px-8">
-            <p class="text-center text-xs font-semibold uppercase tracking-wider text-indigo-600">Nos expertises</p>
-            <h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-slate-900">Six corps de métier, un seul interlocuteur.</h2>
+            <p class="text-center text-xs font-semibold uppercase tracking-wider text-indigo-600">Nos services</p>
+            <h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-slate-900">
+                Six corps de métier, un seul interlocuteur.
+            </h2>
             <p class="mx-auto mt-3 max-w-2xl text-center text-slate-600">
-                Plomberie, électricité, gaz, carrelage, peinture : tous vos intervenants sont salariés chez nous.
-                En clair, vous ne gérez qu'un seul chantier, qu'un seul devis, qu'un seul planning.
+                Plomberie, électricité, peinture, plâtrerie, menuiserie : tous nos compagnons
+                sont salariés et formés. Pour les projets multi-travaux, rénovations complètes,
+                nous coordonnons tout.
             </p>
 
             <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {{-- 5 métiers pilotés par l'enum ServiceType --}}
                 @foreach ($services as $service)
                     <div class="group overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md">
-                        {{-- Placeholder image --}}
-                        <div class="flex h-48 items-center justify-center bg-slate-100 text-5xl" aria-hidden="true">
+                        <div class="flex h-44 items-center justify-center bg-slate-100 text-5xl" aria-hidden="true">
                             {{ $service->icon() }}
                         </div>
                         <div class="p-5">
-                            <h3 class="text-lg font-semibold text-slate-900">{{ $service->label() }}</h3>
+                            <p class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Le problème</p>
+                            <h3 class="mt-1 text-lg font-semibold text-slate-900">{{ $service->label() }}</h3>
+                            {{-- ⚠️ description : celle de l'enum, ajuste sur Figma si besoin --}}
                             <p class="mt-2 text-sm text-slate-600">{{ $service->description() }}</p>
-                            <a href="{{ route('front.services') }}"
+                            <a href="{{ route('front.quote-request.create') }}"
                                class="mt-3 inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-700">
                                 En savoir plus →
                             </a>
                         </div>
                     </div>
                 @endforeach
+
+                {{-- 6e carte : service transverse (mise en avant) --}}
+                <div class="overflow-hidden rounded-xl border border-indigo-200 bg-indigo-600 shadow-sm">
+                    <div class="flex h-44 items-center justify-center bg-indigo-500 text-5xl" aria-hidden="true">🏗️</div>
+                    <div class="p-5">
+                        <p class="text-[11px] font-semibold uppercase tracking-wider text-indigo-200">Tous corps d'état</p>
+                        <h3 class="mt-1 text-lg font-semibold text-white">Pilotage complet de votre projet</h3>
+                        <p class="mt-2 text-sm text-indigo-100">
+                            Vous avez un appartement à rénover entièrement ? Nous coordonnons
+                            tous les corps d'état (plomberie, électricité, peinture, menuiserie)
+                            avec un seul interlocuteur et un seul devis.
+                        </p>
+                        <a href="{{ route('front.quote-request.create') }}"
+                           class="mt-3 inline-flex items-center text-sm font-semibold text-white hover:text-indigo-100">
+                            Demander un devis global →
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     {{-- ===================== ÉTAPES (4 colonnes) ===================== --}}
-    {{-- TODO : prochaine itération --}}
+    <section class="bg-slate-50 py-16">
+        <div class="mx-auto max-w-7xl px-4 lg:px-8">
+            <p class="text-center text-xs font-semibold uppercase tracking-wider text-indigo-600">Comment ça marche</p>
+            <h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-slate-900">
+                De la demande au chantier livré.
+            </h2>
+            <p class="mx-auto mt-3 max-w-2xl text-center text-slate-600">
+                Un processus simple et transparent pour vos travaux.
+            </p>
 
-    {{-- ===================== BANDE URGENCE (rouge/orange) ===================== --}}
-    {{-- TODO : prochaine itération --}}
+            <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="text-center">
+                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 text-lg font-bold text-white">01</div>
+                    <h3 class="mt-4 font-semibold text-slate-900">Décrivez votre projet</h3>
+                    <p class="mt-2 text-sm text-slate-600">Remplissez le formulaire en ligne en quelques minutes.</p>
+                    <p class="mt-2 text-xs font-medium text-indigo-600">3 minutes</p>
+                </div>
+                <div class="text-center">
+                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 text-lg font-bold text-white">02</div>
+                    <h3 class="mt-4 font-semibold text-slate-900">Visite technique</h3>
+                    <p class="mt-2 text-sm text-slate-600">Un compagnon se déplace chez vous pour évaluer le chantier et valider les contraintes techniques.</p>
+                    <p class="mt-2 text-xs font-medium text-indigo-600">Sous 48h</p>
+                </div>
+                <div class="text-center">
+                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 text-lg font-bold text-white">03</div>
+                    <h3 class="mt-4 font-semibold text-slate-900">Devis détaillé</h3>
+                    <p class="mt-2 text-sm text-slate-600">Un devis clair ligne par ligne, sans surprise. Matériaux, main-d'œuvre, délais : tout est transparent.</p>
+                    <p class="mt-2 text-xs font-medium text-indigo-600">Détaillé</p>
+                </div>
+                <div class="text-center">
+                    <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 text-lg font-bold text-white">04</div>
+                    <h3 class="mt-4 font-semibold text-slate-900">Chantier livré</h3>
+                    <p class="mt-2 text-sm text-slate-600">Nos compagnons interviennent dans les délais convenus. Réception contradictoire et garantie décennale.</p>
+                    <p class="mt-2 text-xs font-medium text-indigo-600">Garanti</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ===================== BANDE URGENCE (rouge) ===================== --}}
+    <section class="bg-red-600">
+        <div class="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+            <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+                <div class="text-white">
+                    <span class="inline-flex items-center rounded-full bg-red-500/50 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+                        ⚡ Réponse en moins de deux heures
+                    </span>
+                    <h2 class="mt-4 text-3xl font-bold tracking-tight">Une fuite ? Une panne ? Une urgence ?</h2>
+                    <p class="mt-3 max-w-lg text-red-100">
+                        Décrivez votre problème en 3 minutes. Notre équipe vous rappelle et un
+                        compagnon SYMBIOZ se déplace dans les meilleurs délais.
+                    </p>
+                    <ul class="mt-5 space-y-2 text-sm text-red-50">
+                        <li class="flex items-center gap-2">✓ Dépannage 7j/7 sur Toulouse et petite couronne</li>
+                        <li class="flex items-center gap-2">✓ Tarifs annoncés avant intervention</li>
+                        <li class="flex items-center gap-2">✓ Nos équipes sont assurées et qualifiées</li>
+                    </ul>
+                    <a href="{{ route('front.quick-request.create') }}"
+                       class="mt-6 inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-base font-semibold text-red-600 shadow-sm hover:bg-red-50">
+                        📞 Décrire mon urgence
+                    </a>
+                </div>
+
+                {{-- Aperçu du raccourci urgence (décoratif) --}}
+                <div class="rounded-2xl bg-white p-6 shadow-lg lg:justify-self-end lg:max-w-md">
+                    <p class="text-sm font-semibold text-slate-900">Décrire mon urgence</p>
+                    <p class="mt-1 text-xs text-slate-500">Sélectionnez le type de problème</p>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="rounded-full bg-red-50 px-3 py-1.5 text-sm font-medium text-red-700">Fuite d'eau</span>
+                        <span class="rounded-full bg-red-50 px-3 py-1.5 text-sm font-medium text-red-700">Panne électrique</span>
+                        <span class="rounded-full bg-red-50 px-3 py-1.5 text-sm font-medium text-red-700">Serrurerie</span>
+                        <span class="rounded-full bg-red-50 px-3 py-1.5 text-sm font-medium text-red-700">Toiture</span>
+                        <span class="rounded-full bg-red-50 px-3 py-1.5 text-sm font-medium text-red-700">Chauffage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     {{-- ===================== RÉALISATIONS ===================== --}}
     {{-- TODO : prochaine itération --}}

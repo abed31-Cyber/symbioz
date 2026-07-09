@@ -23,7 +23,14 @@ Route::controller(HomeController::class)->group(function(){
 Route::get('/', 'index')->name('front.home');
 });
 
+// Stubs temporaires — remplacés en US-1.3 (services) et US-1.5 (devis)
+Route::get('/services', fn () => 'Services — à venir')->name('front.services');
+Route::get('/devis', fn () => 'Devis — à venir')->name('front.quote-request.create');
 
+
+// Stubs temporaires — remplacés en US-1.3 (services) et US-1.5 (devis)
+
+Route::get('/urgence', fn () => 'Quick Demande — à venir (Sprint 2)')->name('front.quick-request.create');
 
 
 require __DIR__.'/auth.php';
