@@ -1,7 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
-/* on ajoute ici x-cloak  pour éviter le flash du menu au chargement */
-[x-cloak] { display: none !important; }
