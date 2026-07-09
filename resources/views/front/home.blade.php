@@ -279,19 +279,217 @@
         </div>
     </section>
 
-    {{-- ===================== RÉALISATIONS ===================== --}}
-    {{-- TODO : prochaine itération --}}
+  {{-- ===================== RÉALISATIONS ===================== --}}
+    <section id="realisations" class="py-16">
+        <div class="mx-auto max-w-7xl px-4 lg:px-8">
+            <p class="text-center text-xs font-semibold uppercase tracking-wider text-indigo-600">Nos réalisations</p>
+            <h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-slate-900">
+                Des chantiers livrés, pas des promesses.
+            </h2>
+            <p class="mx-auto mt-3 max-w-2xl text-center text-slate-600">
+                Cinq projets parmi les 80+ livrés en 2026. Photos non retouchées, témoignages clients vérifiés.
+            </p>
+
+            <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+                {{-- Grande réalisation --}}
+                <div class="group relative overflow-hidden rounded-2xl bg-slate-200">
+                    <div class="flex h-80 items-center justify-center bg-gradient-to-br from-slate-300 to-slate-400 text-4xl" aria-hidden="true">🏠</div>
+                    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                        <span class="inline-flex rounded bg-white/90 px-2 py-0.5 text-[11px] font-semibold uppercase text-slate-800">Rénovation complète · 78 m²</span>
+                        <h3 class="mt-2 text-lg font-bold text-white">Appartement Capitole</h3>
+                        <p class="mt-1 text-sm text-slate-200">Tous corps d'état coordonnés, livré en 6 semaines pour la famille Drogba. Budget ~42 000 €.</p>
+                    </div>
+                </div>
+
+                {{-- Colonne de petites réalisations --}}
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div class="group relative overflow-hidden rounded-2xl bg-slate-200">
+                        <div class="flex h-[152px] items-center justify-center bg-gradient-to-br from-indigo-200 to-indigo-300 text-3xl" aria-hidden="true">🛁</div>
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <span class="inline-flex rounded bg-white/90 px-2 py-0.5 text-[10px] font-semibold uppercase text-slate-800">Salle de bain</span>
+                            <h3 class="mt-1 text-sm font-bold text-white">Famille Ronaldo · Esquirol</h3>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded-2xl bg-slate-200">
+                        <div class="flex h-[152px] items-center justify-center bg-gradient-to-br from-amber-200 to-amber-300 text-3xl" aria-hidden="true">🎨</div>
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <span class="inline-flex rounded bg-white/90 px-2 py-0.5 text-[10px] font-semibold uppercase text-slate-800">Peinture & sols</span>
+                            <h3 class="mt-1 text-sm font-bold text-white">Bureau Avocat · Compans Caffarelli</h3>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded-2xl bg-slate-200">
+                        <div class="flex h-[152px] items-center justify-center bg-gradient-to-br from-emerald-200 to-emerald-300 text-3xl" aria-hidden="true">🧱</div>
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <span class="inline-flex rounded bg-white/90 px-2 py-0.5 text-[10px] font-semibold uppercase text-slate-800">Rénovation escalier</span>
+                            <h3 class="mt-1 text-sm font-bold text-white">SCI Les Lilas · La Cartoucherie</h3>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden rounded-2xl bg-slate-200">
+                        <div class="flex h-[152px] items-center justify-center bg-gradient-to-br from-rose-200 to-rose-300 text-3xl" aria-hidden="true">🍳</div>
+                        <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <span class="inline-flex rounded bg-white/90 px-2 py-0.5 text-[10px] font-semibold uppercase text-slate-800">Cuisine sur-mesure</span>
+                            <h3 class="mt-1 text-sm font-bold text-white">M. & Mme Antoine Dupont · Lacroix Falgarde</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     {{-- ===================== À PROPOS (entreprise familiale) ===================== --}}
-    {{-- TODO : prochaine itération --}}
+    <section id="a-propos" class="bg-slate-50 py-16">
+        <div class="mx-auto max-w-7xl px-4 lg:px-8">
+            <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+                <div class="overflow-hidden rounded-2xl bg-slate-200">
+                    <div class="flex h-96 items-center justify-center bg-gradient-to-br from-indigo-300 to-slate-400 text-5xl" aria-hidden="true">👷</div>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-indigo-600">L'entreprise</p>
+                    <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900">
+                        SYMBIOZ, une entreprise familiale au service de votre projet.
+                    </h2>
+                    <p class="mt-4 text-slate-600">
+                        Fondée en 2026 par Karim, SYMBIOZ est une entreprise de second œuvre
+                        indépendante basée à Toulouse. Notre équipe de 6 compagnons salariés
+                        intervient quotidiennement chez les particuliers, en bureaux et en
+                        commerces sur toute la Haute-Garonne.
+                    </p>
+                    <p class="mt-3 text-slate-600">
+                        Notre engagement : un seul interlocuteur du devis à la livraison, des
+                        devis détaillés et tenus, un chantier propre et respecté. Tous nos
+                        compagnons sont salariés, formés et qualifiés.
+                    </p>
+
+                    <div class="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
+                        <div>
+                            <p class="text-2xl font-bold text-indigo-600">2</p>
+                            <p class="text-xs text-slate-500">Compagnons salariés</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-indigo-600">98%</p>
+                            <p class="text-xs text-slate-500">Clients satisfaits</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-indigo-600">80+</p>
+                            <p class="text-xs text-slate-500">Chantiers réalisés</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-indigo-600">48h</p>
+                            <p class="text-xs text-slate-500">Délai de devis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     {{-- ===================== TÉMOIGNAGES ===================== --}}
-    {{-- TODO : prochaine itération --}}
+    <section id="temoignages" class="py-16">
+        <div class="mx-auto max-w-7xl px-4 lg:px-8">
+            <p class="text-center text-xs font-semibold uppercase tracking-wider text-indigo-600">Ils nous font confiance</p>
+            <h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-slate-900">
+                Ce que disent nos clients.
+            </h2>
+
+            <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+                <figure class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <div class="text-lg text-amber-400" aria-hidden="true">★★★★★</div>
+                    <blockquote class="mt-3 text-sm leading-relaxed text-slate-600">
+                        « SYMBIOZ a rénové notre salle de bain en 3 semaines, exactement comme
+                        prévu. Équipe sérieuse, chantier propre, devis tenu au centime près.
+                        Je les recommande sans hésiter. »
+                    </blockquote>
+                    <figcaption class="mt-4 text-sm">
+                        <span class="font-semibold text-slate-900">Marie L.</span>
+                        <span class="text-slate-500"> · Esquirol · Rénovation salle de bain</span>
+                    </figcaption>
+                </figure>
+                <figure class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <div class="text-lg text-amber-400" aria-hidden="true">★★★★★</div>
+                    <blockquote class="mt-3 text-sm leading-relaxed text-slate-600">
+                        « Nous avons confié à SYMBIOZ la rénovation complète de notre appartement
+                        de 78 m². Coordination parfaite entre tous les corps d'état, un seul
+                        interlocuteur. Livré dans les délais. »
+                    </blockquote>
+                    <figcaption class="mt-4 text-sm">
+                        <span class="font-semibold text-slate-900">Famille Drogba</span>
+                        <span class="text-slate-500"> · Capitole · Rénovation complète</span>
+                    </figcaption>
+                </figure>
+                <figure class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <div class="text-lg text-amber-400" aria-hidden="true">★★★★★</div>
+                    <blockquote class="mt-3 text-sm leading-relaxed text-slate-600">
+                        « En tant que SCI bailleresse, nous travaillons avec SYMBIOZ depuis 2 ans
+                        pour la remise en état entre locataires. Réactifs, ponctuels, et toujours
+                        un excellent rapport qualité-prix. »
+                    </blockquote>
+                    <figcaption class="mt-4 text-sm">
+                        <span class="font-semibold text-slate-900">SCI Les Lilas</span>
+                        <span class="text-slate-500"> · La Cartoucherie · Multi-chantiers</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
 
     {{-- ===================== FAQ (accordéon Alpine.js) ===================== --}}
-    {{-- TODO : prochaine itération --}}
+    <section id="faq" class="bg-slate-50 py-16">
+        <div class="mx-auto max-w-3xl px-4 lg:px-8">
+            <p class="text-center text-xs font-semibold uppercase tracking-wider text-indigo-600">FAQ</p>
+            <h2 class="mt-2 text-center text-3xl font-bold tracking-tight text-slate-900">
+                Les questions qu'on nous pose souvent.
+            </h2>
+
+            <div class="mt-10 space-y-3" x-data="{ open: null }">
+                @foreach ([
+                    ['q' => 'Le devis est-il gratuit ?', 'a' => 'Oui. Nos devis sont gratuits et sans engagement. Pour les petits travaux, nous pouvons chiffrer sur photos ; pour les chantiers plus importants, nous organisons une visite technique sur place.'],
+                    ['q' => 'Sous quel délai pouvez-vous intervenir ?', 'a' => 'Pour un devis, nous vous répondons sous 48h ouvrées. Pour une urgence, un compagnon vous rappelle sous 2h ouvrées.'],
+                    ['q' => 'Quelles zones couvrez-vous ?', 'a' => 'Toulouse et sa petite couronne, ainsi que l\'ensemble de la Haute-Garonne (31).'],
+                    ['q' => 'Êtes-vous assurés et certifiés ?', 'a' => 'Oui. Nous sommes certifiés Qualibat et couverts par une garantie décennale. Tous nos compagnons sont salariés et assurés.'],
+                    ['q' => 'Acceptez-vous les paiements en plusieurs fois ?', 'a' => 'Pour les chantiers importants, un échelonnement est possible (acompte, situations intermédiaires, solde à réception). Les modalités sont précisées sur le devis.'],
+                ] as $i => $item)
+                    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                        <button type="button"
+                                @click="open === {{ $i }} ? open = null : open = {{ $i }}"
+                                :aria-expanded="open === {{ $i }}"
+                                class="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-semibold text-slate-900 hover:bg-slate-50">
+                            {{ $item['q'] }}
+                            <svg class="h-5 w-5 shrink-0 text-slate-400 transition-transform duration-200"
+                                 :class="open === {{ $i }} ? 'rotate-180' : ''"
+                                 fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                        <div x-show="open === {{ $i }}" x-collapse x-cloak>
+                            <p class="border-t border-slate-100 px-5 py-4 text-sm leading-relaxed text-slate-600">
+                                {{ $item['a'] }}
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
 
     {{-- ===================== CTA FINAL ===================== --}}
-    {{-- TODO : prochaine itération --}}
+    <section class="bg-slate-900">
+        <div class="mx-auto max-w-4xl px-4 py-16 text-center lg:px-8">
+            <h2 class="text-3xl font-bold tracking-tight text-white">Un projet en tête ?</h2>
+            <p class="mx-auto mt-4 max-w-xl text-slate-300">
+                Décrivez-nous votre besoin en quelques minutes. On vous rappelle rapidement
+                pour préciser votre projet et organiser une visite technique si nécessaire.
+            </p>
+            <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <a href="{{ route('front.quote-request.create') }}"
+                   class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-700">
+                    Décrire mon projet →
+                </a>
+                <a href="tel:0784880000"
+                   class="text-base font-semibold text-white hover:text-indigo-300">
+                    📞 07 84 88 00 00
+                </a>
+            </div>
+        </div>
+    </section>
 
 @endsection
