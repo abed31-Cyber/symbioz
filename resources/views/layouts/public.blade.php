@@ -7,16 +7,14 @@
 
     <title>@yield('title', 'Accueil') — SYMBIOZ</title>
     <meta name="description"
-          content="@yield('meta_description', 'SYMBIOZ — Artisans du BTP second œuvre. Demandez votre devis en ligne.')">
+          content="@yield('meta_description', 'SYMBIOZ — Artisans du BTP second œuvre à Toulouse. Devis gratuit en ligne.')">
 
-    {{-- Assets compilés par Vite : Tailwind + Alpine sont fournis par Breeze --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     @stack('head')
 </head>
-<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800 antialiased">
+<body class="min-h-screen flex flex-col bg-white text-slate-800 antialiased">
 
-    {{-- Lien d'évitement : accessibilité clavier (WCAG) --}}
+    {{-- Lien d'évitement (accessibilité WCAG) --}}
     <a href="#main-content"
        class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-white">
         Aller au contenu principal
@@ -24,29 +22,25 @@
 
     {{-- ===================== HEADER ===================== --}}
     <header x-data="{ open: false }"
-            class="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
-        <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3"
+            class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8"
              aria-label="Navigation principale">
 
-            {{-- Marque --}}
-            <a href="{{ route('front.home') }}"
-               class="flex items-center gap-2 text-xl font-bold tracking-tight text-slate-900">
-                <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600 text-white">S</span>
-                SYMBIOZ
+            {{-- Logo wordmark fidèle maquette --}}
+            <a href="{{ route('front.home') }}" class="text-xl font-extrabold tracking-tight text-slate-900">
+                symbioz<span class="text-indigo-600">.</span>
             </a>
 
             {{-- Navigation desktop --}}
-            <div class="hidden items-center gap-6 md:flex">
-                <a href="{{ route('front.home') }}"
-                   @if(request()->routeIs('front.home')) aria-current="page" @endif
-                   class="text-sm font-medium hover:text-indigo-600 {{ request()->routeIs('front.home') ? 'text-indigo-600' : 'text-slate-600' }}">
-                    Accueil
-                </a>
+            <div class="hidden items-center gap-8 md:flex">
                 <a href="{{ route('front.services') }}"
-                   @if(request()->routeIs('front.services')) aria-current="page" @endif
-                   class="text-sm font-medium hover:text-indigo-600 {{ request()->routeIs('front.services') ? 'text-indigo-600' : 'text-slate-600' }}">
-                    Services
-                </a>
+                   class="text-sm font-medium text-slate-600 hover:text-slate-900">Nos services</a>
+                <a href="{{ route('front.home') }}#realisations"
+                   class="text-sm font-medium text-slate-600 hover:text-slate-900">Réalisations</a>
+                <a href="{{ route('front.home') }}#a-propos"
+                   class="text-sm font-medium text-slate-600 hover:text-slate-900">À propos</a>
+                <a href="{{ route('front.home') }}#faq"
+                   class="text-sm font-medium text-slate-600 hover:text-slate-900">FAQ</a>
                 <a href="{{ route('front.quote-request.create') }}"
                    class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     Demander un devis
@@ -76,12 +70,18 @@
              @keydown.escape.window="open = false"
              class="border-t border-slate-200 md:hidden">
             <div class="space-y-1 px-4 py-3">
-                <a href="{{ route('front.home') }}"
-                   class="block rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100">Accueil</a>
                 <a href="{{ route('front.services') }}"
-                   class="block rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100">Services</a>
+                   class="block rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100">Nos services</a>
+                <a href="{{ route('front.home') }}#realisations"
+                   class="block rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100">Réalisations</a>
+                <a href="{{ route('front.home') }}#a-propos"
+                   class="block rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100">À propos</a>
+                <a href="{{ route('front.home') }}#faq"
+                   class="block rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100">FAQ</a>
                 <a href="{{ route('front.quote-request.create') }}"
-                   class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-base font-semibold text-white hover:bg-indigo-700">Demander un devis</a>
+                   class="mt-2 block rounded-md bg-indigo-600 px-3 py-2 text-center text-base font-semibold text-white hover:bg-indigo-700">
+                    Demander un devis
+                </a>
             </div>
         </div>
     </header>
@@ -92,14 +92,52 @@
     </main>
 
     {{-- ===================== FOOTER ===================== --}}
-    <footer class="border-t border-slate-200 bg-white">
-        <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row">
-            <p class="text-sm text-slate-500">© {{ date('Y') }} SYMBIOZ — Artisans du BTP. Tous droits réservés.</p>
-            <nav class="flex gap-4 text-sm text-slate-500" aria-label="Liens de pied de page">
-                <a href="{{ route('front.home') }}" class="hover:text-indigo-600">Accueil</a>
-                <a href="{{ route('front.services') }}" class="hover:text-indigo-600">Services</a>
-                <a href="{{ route('front.quote-request.create') }}" class="hover:text-indigo-600">Devis</a>
-            </nav>
+    <footer class="border-t border-slate-200 bg-slate-900 text-slate-300">
+        <div class="mx-auto max-w-7xl px-4 py-12 lg:px-8">
+            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                {{-- Colonne marque --}}
+                <div>
+                    <p class="text-lg font-extrabold text-white">symbioz<span class="text-indigo-400">.</span></p>
+                    <p class="mt-3 text-sm leading-relaxed">
+                        Entreprise de second œuvre basée à Toulouse.
+                        Plomberie, électricité, peinture, plâtrerie, menuiserie :
+                        nos équipes interviennent pour particuliers et professionnels.
+                    </p>
+                </div>
+                {{-- Colonne services --}}
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Nos services</h3>
+                    <ul class="mt-3 space-y-2 text-sm">
+                        <li><a href="{{ route('front.services') }}" class="hover:text-white">Plomberie</a></li>
+                        <li><a href="{{ route('front.services') }}" class="hover:text-white">Électricité</a></li>
+                        <li><a href="{{ route('front.services') }}" class="hover:text-white">Peinture & Plâtrerie</a></li>
+                        <li><a href="{{ route('front.services') }}" class="hover:text-white">Menuiserie</a></li>
+                    </ul>
+                </div>
+                {{-- Colonne entreprise --}}
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Entreprise</h3>
+                    <ul class="mt-3 space-y-2 text-sm">
+                        <li><a href="{{ route('front.home') }}#a-propos" class="hover:text-white">À propos</a></li>
+                        <li><a href="{{ route('front.home') }}#realisations" class="hover:text-white">Nos réalisations</a></li>
+                        <li><a href="{{ route('front.home') }}#temoignages" class="hover:text-white">Nos engagements</a></li>
+                    </ul>
+                </div>
+                {{-- Colonne légal --}}
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Légal</h3>
+                    <ul class="mt-3 space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">Mentions légales</a></li>
+                        <li><a href="#" class="hover:text-white">Données personnelles</a></li>
+                        <li><a href="#" class="hover:text-white">CGV</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-10 border-t border-slate-700 pt-6 text-center text-xs text-slate-500">
+                © {{ date('Y') }} SYMBIOZ · PROJET PÉDAGOGIQUE · TITRE DWWM LA PLATEFORME
+                <span class="mx-2">·</span>
+                Conçu à Toulouse — La Cartoucherie
+            </div>
         </div>
     </footer>
 
