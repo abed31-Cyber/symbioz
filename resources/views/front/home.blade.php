@@ -72,16 +72,20 @@
                 {{-- Colonne droite : carte aperçu (décorative) --}}
                 <div class="relative hidden lg:block">
                     {{-- Mini-carte flottante "Chantier livré" --}}
-                    <div class="absolute -top-4 right-6 z-10 flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 shadow-md">
+                    <div class="relative left-0 right-6 z-10 flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 shadow-md">
                         <span class="flex h-6 w-6 items-center justify-center rounded-full bg-green-100 text-green-600">✓</span>
-                        <div>
-                            <p class="text-xs font-semibold text-slate-900">Chantier livré</p>
-                            <p class="text-[11px] text-slate-500">Famille Steven · Tournefeuille (31)</p>
+                        <div class="flex flex-inline gap-2">
+                            <p class="text-xs font-extrabold text-slate-900">Chantier livré</p>
+
+                            <div>
+                                <p class="text-[11px] text-slate-500 " >Famille Steven · Tournefeuille (31)</p>
+                            </div>
+
                         </div>
                     </div>
 
                     {{-- Carte "Nouvelle demande" --}}
-                    <div class="rounded-2xl border border-slate-200 bg-white p-6 pt-8 shadow-lg">
+                    <div class="mt-6rounded-2xl border border-slate-200 bg-white p-6 pt-8 shadow-lg">
                         <div class="flex items-center justify-between">
                             <h2 class="text-sm font-semibold text-slate-900">Nouvelle demande</h2>
                             <span class="inline-flex items-center rounded-full bg-orange-100 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-orange-700">
@@ -472,7 +476,7 @@
     </section>
 
     {{-- ===================== CTA FINAL ===================== --}}
-    <section class="bg-slate-900">
+    <section class="bg-slate-900 mb-16 rounded-xl max-w-7xl mx-auto  py-10 lg:px-8">
         <div class="mx-auto max-w-4xl px-4 py-16 text-center lg:px-8">
             <h2 class="text-3xl font-bold tracking-tight text-white">Un projet en tête ?</h2>
             <p class="mx-auto mt-4 max-w-xl text-slate-300">
