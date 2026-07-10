@@ -55,6 +55,20 @@ enum ServiceType: string
             self::Menuiserie  => 'Pose de portes, fenêtres, parquets et aménagements sur mesure.',
         };
     }
+
+    /*
+     * Image illustrant le service sur la page d'accueil et la page services.
+     */
+public function image(): string
+{
+    return match ($this) {
+        self::Plomberie   => 'images/services/plomberie.jpg',
+        self::Electricite => 'images/services/electricite.jpg',
+        self::Peinture    => 'images/services/peinture.jpg',
+        self::Platrerie   => 'images/services/platrerie.jpg',
+        self::Menuiserie  => 'images/services/menuiserie.jpg',
+    };
+}
 }
 /**
  * Pourquoi utilise-t-on des Enums ? on verrouille les valeurs possibles en base de données et dans le code.
@@ -66,3 +80,22 @@ enum ServiceType: string
 
 //Ce fichier liste les métiers du second œuvre gérés par Karim.
 // Nous y ajoutons une méthode label() pour obtenir la version propre en français dans l'interface.
+
+
+
+    /**exemple d'utilisation dans un contrôleur ou une vue Blade :
+    *$serviceType = ServiceType::Plomberie;
+   * echo $serviceType->label(); // Affiche "Plomberie"
+    echo $serviceType->icon(); // Affiche "🔧   "
+*
+    *exemple d'utilisation dans une vue Blade :
+    @foreach (App\Enums\ServiceType::cases() as $serviceType)
+        *<div class="service-card">
+            *<span class="service-icon">{{ $serviceType->icon() }}</span>
+            *<h3 class="service-label">{{ $serviceType->label() }}</h3>
+           * <p class="service-description">{{ $serviceType->description() }}</p>
+       * </div>
+          * <img src="{{ asset($service->image()) }}"
+        * alt="Service {{ $service->label() }} — SYMBIOZ"
+      *class="h-44 w-full object-cover">
+      */
