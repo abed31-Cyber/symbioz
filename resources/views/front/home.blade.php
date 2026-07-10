@@ -174,7 +174,7 @@
                             <h3 class="mt-1 text-lg font-semibold text-slate-900">{{ $service->label() }}</h3>
                             {{-- ⚠️ description : celle de l'enum, ajuste sur Figma si besoin --}}
                             <p class="mt-2 text-sm text-slate-600">{{ $service->description() }}</p>
-                            <a href="{{ route('front.quote-request.create') }}"
+                            <a href="{{ route('front.services') }}"
                                class="mt-3 inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-700">
                                 En savoir plus →
                             </a>
