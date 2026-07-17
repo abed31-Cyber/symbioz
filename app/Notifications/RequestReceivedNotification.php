@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notification;
  * Conditionnel : envoyé uniquement si le client a fourni un email (RG-7/RG-8).
  * L'envoi conditionnel est géré dans RequestService@notify().
  */
-class RequestReceivedNotifications extends Notification
+class RequestReceivedNotification extends Notification
 {
     use Queueable;
 
