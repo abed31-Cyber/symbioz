@@ -1,5 +1,4 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -8,14 +7,20 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
-
     theme: {
         extend: {
+            colors: {
+                brand: {
+                    DEFAULT: '#5417D6',
+                    light: '#EEF0FE',
+                    dark: '#3B0FA0',
+                },
+                accent: '#F5500A',
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
         },
     },
-
-    plugins: [forms],
+    plugins: [],
 };

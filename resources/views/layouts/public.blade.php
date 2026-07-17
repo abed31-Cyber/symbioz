@@ -1,142 +1,112 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>@yield('title', 'Accueil') — SYMBIOZ</title>
-    <meta name="description"
-          content="@yield('meta_description', 'SYMBIOZ — Artisans du BTP second œuvre à Toulouse. Devis gratuit en ligne.')">
-
+    <meta name="description" content="SYMBIOZ — Plomberie, électricité, peinture, menuiserie et rénovation à Toulouse.">
+    <title>@yield('title', 'SYMBIOZ — Votre partenaire bâtiment')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @stack('head')
 </head>
-<body class="min-h-screen flex flex-col bg-white text-slate-800 antialiased">
+<body class="min-h-screen flex flex-col bg-gray-50 font-sans text-gray-900 antialiased">
 
-    {{-- Lien d'évitement (accessibilité WCAG) --}}
-    <a href="#main-content"
-       class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-white">
-        Aller au contenu principal
-    </a>
+    {{-- ========== HEADER ========== --}}
+    <header class="bg-white border-b border-gray-200" x-data="{ open: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
 
-    {{-- ===================== HEADER ===================== --}}
-    <header x-data="{ open: false }"
-            class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8"
-             aria-label="Navigation principale">
-
-            {{-- Logo wordmark fidèle maquette --}}
-            <a href="{{ route('front.home') }}" class="text-xl font-extrabold tracking-tight text-slate-900">
-                symbioz<span class="text-indigo-600">.</span>
-            </a>
-
-            {{-- Navigation desktop --}}
-            <div class="hidden items-center gap-8 md:flex">
-                <a href="{{ route('front.services') }}"
-                   class="text-sm font-medium text-slate-600 hover:text-slate-900">Nos services</a>
-                <a href="{{ route('front.home') }}#realisations"
-                   class="text-sm font-medium text-slate-600 hover:text-slate-900">Réalisations</a>
-                <a href="{{ route('front.home') }}#a-propos"
-                   class="text-sm font-medium text-slate-600 hover:text-slate-900">À propos</a>
-                <a href="{{ route('front.home') }}#faq"
-                   class="text-sm font-medium text-slate-600 hover:text-slate-900">FAQ</a>
-                <a href="{{ route('front.quote-request.create') }}"
-                   class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                    Demander un devis
+                {{-- Logo --}}
+                <a href="{{ route('front.home') }}" class="text-2xl font-extrabold tracking-tight">
+                    symbioz<span class="text-accent">.</span>
                 </a>
+
+                {{-- Nav desktop --}}
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="{{ route('front.home') }}" class="hover:text-brand transition">Accueil</a>
+                    <a href="{{ route('front.services') }}" class="hover:text-brand transition">Nos services</a>
+                    <a href="{{ route('front.quote.create') }}" class="hover:text-brand transition">Demander un devis</a>
+                    <a href="{{ route('front.quick.create') }}" class="text-red-600 font-semibold hover:text-red-700 transition">Urgence</a>
+                </nav>
+
+                {{-- CTA desktop --}}
+                <a href="{{ route('login') }}" class="hidden md:inline-flex items-center px-4 py-2 bg-brand text-white text-sm font-semibold rounded-lg hover:bg-brand-dark transition">
+                    Espace Pro
+                </a>
+
+                {{-- Burger mobile --}}
+                <button @click="open = !open" class="md:hidden p-2 text-gray-600 hover:text-brand" aria-label="Menu">
+                    <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg x-show="open" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
             </div>
 
-            {{-- Bouton menu mobile --}}
-            <button type="button"
-                    @click="open = !open"
-                    :aria-expanded="open"
-                    aria-controls="mobile-menu"
-                    class="inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 md:hidden">
-                <span class="sr-only">Ouvrir le menu</span>
-                <svg x-show="!open" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                     stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
-                </svg>
-                <svg x-show="open" x-cloak class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                     stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </nav>
-
-        {{-- Panneau mobile --}}
-        <div x-show="open" x-cloak id="mobile-menu"
-             @keydown.escape.window="open = false"
-             class="border-t border-slate-200 md:hidden">
-            <div class="space-y-1 px-4 py-3">
-                <a href="{{ route('front.services') }}"
-                   class="block rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100">Nos services</a>
-                <a href="{{ route('front.home') }}#realisations"
-                   class="block rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100">Réalisations</a>
-                <a href="{{ route('front.home') }}#a-propos"
-                   class="block rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100">À propos</a>
-                <a href="{{ route('front.home') }}#faq"
-                   class="block rounded-md px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100">FAQ</a>
-                <a href="{{ route('front.quote-request.create') }}"
-                   class="mt-2 block rounded-md bg-indigo-600 px-3 py-2 text-center text-base font-semibold text-white hover:bg-indigo-700">
-                    Demander un devis
-                </a>
+            {{-- Nav mobile --}}
+            <div x-show="open" x-cloak x-transition class="md:hidden pb-4 space-y-2">
+                <a href="{{ route('front.home') }}" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-100">Accueil</a>
+                <a href="{{ route('front.services') }}" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-100">Nos services</a>
+                <a href="{{ route('front.quote.create') }}" class="block px-3 py-2 rounded-lg text-sm font-medium hover:bg-gray-100">Demander un devis</a>
+                <a href="{{ route('front.quick.create') }}" class="block px-3 py-2 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50">Urgence</a>
+                <a href="{{ route('login') }}" class="block px-3 py-2 rounded-lg text-sm font-semibold text-brand hover:bg-brand-light">Espace Pro</a>
             </div>
         </div>
     </header>
 
-    {{-- ===================== CONTENU ===================== --}}
-    <main id="main-content" class="flex-1">
+    {{-- ========== CONTENU ========== --}}
+    <main class="flex-1">
         @yield('content')
     </main>
 
-    {{-- ===================== FOOTER ===================== --}}
-    <footer class="border-t border-slate-200 bg-slate-900 text-slate-300">
-        <div class="mx-auto max-w-7xl px-4 py-12 lg:px-8">
-            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                {{-- Colonne marque --}}
+    {{-- ========== FOOTER ========== --}}
+    <footer class="bg-gray-900 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+                {{-- Col 1 : Brand --}}
                 <div>
-                    <p class="text-lg font-extrabold text-white">symbioz<span class="text-indigo-400">.</span></p>
+                    <a href="{{ route('front.home') }}" class="text-xl font-extrabold text-white">
+                        symbioz<span class="text-accent">.</span>
+                    </a>
                     <p class="mt-3 text-sm leading-relaxed">
-                        Entreprise de second œuvre basée à Toulouse.
-                        Plomberie, électricité, peinture, plâtrerie, menuiserie :
-                        nos équipes interviennent pour particuliers et professionnels.
+                        Plomberie, électricité, peinture, plâtrerie, menuiserie : nos équipes interviennent pour particuliers et professionnels.
                     </p>
                 </div>
-                {{-- Colonne services --}}
+
+                {{-- Col 2 : Services --}}
                 <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Nos services</h3>
-                    <ul class="mt-3 space-y-2 text-sm">
-                        <li><a href="{{ route('front.services') }}" class="hover:text-white">Plomberie</a></li>
-                        <li><a href="{{ route('front.services') }}" class="hover:text-white">Électricité</a></li>
-                        <li><a href="{{ route('front.services') }}" class="hover:text-white">Peinture & Plâtrerie</a></li>
-                        <li><a href="{{ route('front.services') }}" class="hover:text-white">Menuiserie</a></li>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Nos services</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="{{ route('front.services') }}" class="hover:text-white transition">Plomberie</a></li>
+                        <li><a href="{{ route('front.services') }}" class="hover:text-white transition">Électricité</a></li>
+                        <li><a href="{{ route('front.services') }}" class="hover:text-white transition">Peinture & Plâtrerie</a></li>
+                        <li><a href="{{ route('front.services') }}" class="hover:text-white transition">Menuiserie</a></li>
                     </ul>
                 </div>
-                {{-- Colonne entreprise --}}
+
+                {{-- Col 3 : Entreprise --}}
                 <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Entreprise</h3>
-                    <ul class="mt-3 space-y-2 text-sm">
-                        <li><a href="{{ route('front.home') }}#a-propos" class="hover:text-white">À propos</a></li>
-                        <li><a href="{{ route('front.home') }}#realisations" class="hover:text-white">Nos réalisations</a></li>
-                        <li><a href="{{ route('front.home') }}#temoignages" class="hover:text-white">Nos engagements</a></li>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Entreprise</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="{{ route('front.services') }}" class="hover:text-white transition">Nos réalisations</a></li>
+                        <li><a href="{{ route('front.quote.create') }}" class="hover:text-white transition">Demander un devis</a></li>
                     </ul>
                 </div>
-                {{-- Colonne légal --}}
+
+                {{-- Col 4 : Légal --}}
                 <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Légal</h3>
-                    <ul class="mt-3 space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-white">Mentions légales</a></li>
-                        <li><a href="#" class="hover:text-white">Données personnelles</a></li>
-                        <li><a href="#" class="hover:text-white">CGV</a></li>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Légal</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><span>Mentions légales</span></li>
+                        <li><span>Données personnelles</span></li>
                     </ul>
                 </div>
             </div>
-            <div class="mt-10 border-t border-slate-700 pt-6 text-center text-xs text-slate-500">
-                © {{ date('Y') }} SYMBIOZ · PROJET PÉDAGOGIQUE · TITRE DWWM LA PLATEFORME
-                <span class="mx-2">·</span>
-                Conçu à Toulouse — La Cartoucherie
+
+            <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs">
+                <span>&copy; {{ date('Y') }} SYMBIOZ · PROJET PÉDAGOGIQUE · TITRE DWWM</span>
+                <span class="mt-2 sm:mt-0">Conçu à Toulouse</span>
             </div>
         </div>
     </footer>
