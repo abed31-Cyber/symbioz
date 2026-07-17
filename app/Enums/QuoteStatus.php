@@ -2,36 +2,36 @@
 
 namespace App\Enums;
 
+/**
+ * Statut d'un devis émis par l'admin.
+ */
 enum QuoteStatus: string
 {
-    case Nouveau = 'nouveau';
-    case EnCours = 'en_cours';
-    case Traite = 'traite';
-    case Perdu = 'perdu';
+    case DRAFT = 'draft';
+    case SENT = 'sent';
+    case ACCEPTED = 'accepted';
+    case REFUSED = 'refused';
+    case PAID = 'paid';
 
-    /**
-     * Libellé français pour affichage.
-     */
     public function label(): string
     {
         return match ($this) {
-            self::Nouveau => 'Nouveau',
-            self::EnCours => 'En cours',
-            self::Traite => 'Traité',
-            self::Perdu => 'Perdu',
+            self::DRAFT    => 'Brouillon',
+            self::SENT     => 'Envoyé',
+            self::ACCEPTED => 'Accepté',
+            self::REFUSED  => 'Refusé',
+            self::PAID     => 'Payé',
         };
     }
 
-    /**
-     * Couleur Tailwind pour le badge de statut (composant StatusBadge).
-     */
     public function color(): string
     {
         return match ($this) {
-            self::Nouveau => 'blue',
-            self::EnCours => 'yellow',
-            self::Traite => 'green',
-            self::Perdu => 'red',
+            self::DRAFT    => 'bg-gray-100 text-gray-700',
+            self::SENT     => 'bg-blue-100 text-blue-700',
+            self::ACCEPTED => 'bg-green-100 text-green-700',
+            self::REFUSED  => 'bg-red-100 text-red-700',
+            self::PAID     => 'bg-emerald-100 text-emerald-700',
         };
     }
 }
