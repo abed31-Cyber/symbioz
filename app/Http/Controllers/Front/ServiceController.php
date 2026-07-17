@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\View\View;
 
-class HomeController extends Controller
+class ServiceController extends Controller
 {
     /**
-     * Page d'accueil — affiche les services pour la section vitrine.
+     * Page services — liste les 6 services depuis la BDD.
      */
     public function index(): View
     {
-        return view('front.home', [
+        return view('front.services', [
             'services' => Service::all(),
         ]);
     }

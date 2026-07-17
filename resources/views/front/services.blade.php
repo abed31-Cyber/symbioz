@@ -1,80 +1,114 @@
 @extends('layouts.public')
 
-@section('title', 'Nos services')
-@section('meta_description', 'Plomberie, électricité, peinture, plâtrerie, menuiserie : découvrez les services de second œuvre SYMBIOZ à Toulouse.')
+@section('title', 'Nos services — SYMBIOZ')
+
+@php
+    // Descriptions et icônes par slug (le référentiel est figé — CDC §4.4)
+    $meta = [
+        'plomberie' => [
+            'desc' => 'Installation, dépannage et rénovation de vos réseaux d\'eau : sanitaires, chauffe-eau, robinetterie, recherche de fuite.',
+            'icon' => 'M12 2.69l5.66 5.66a8 8 0 11-11.31 0z',
+        ],
+        'electricite' => [
+            'desc' => 'Mise aux normes, tableau électrique, installation et dépannage. Nos électriciens interviennent en toute sécurité.',
+            'icon' => 'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
+        ],
+        'peinture' => [
+            'desc' => 'Peinture intérieure et extérieure, finitions soignées, préparation des supports pour un résultat impeccable.',
+            'icon' => 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+        ],
+        'platrerie' => [
+            'desc' => 'Cloisons, doublages, faux plafonds, enduits. Nous façonnons vos espaces avec précision.',
+            'icon' => 'M4 4h16v16H4z M4 9h16 M9 4v16',
+        ],
+        'menuiserie' => [
+            'desc' => 'Pose et fabrication : portes, fenêtres, placards sur mesure, parquet. Le bois entre de bonnes mains.',
+            'icon' => 'M3 7l9-4 9 4-9 4-9-4z M3 7v10l9 4 9-4V7',
+        ],
+        'renovation-globale' => [
+            'desc' => 'Un interlocuteur unique pour coordonner tous les corps de métier de votre projet de rénovation complète.',
+            'icon' => 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+        ],
+    ];
+@endphp
 
 @section('content')
 
-    {{-- En-tête --}}
-    <section class="bg-gradient-to-br from-slate-50 to-indigo-50">
-        <div class="mx-auto max-w-4xl px-4 py-16 text-center lg:px-8 lg:py-20">
-            <p class="text-xs font-semibold uppercase tracking-wider text-indigo-600">Nos services</p>
-            <h1 class="mt-2 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+    {{-- ===== EN-TÊTE ===== --}}
+    <section class="bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 text-center">
+            <p class="text-brand text-sm font-bold uppercase tracking-wider mb-2">Nos métiers</p>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
                 Six corps de métier, un seul interlocuteur.
             </h1>
-            <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
-                Tous nos compagnons sont salariés et formés. Pour un dépannage ou une
-                rénovation complète, vous ne gérez qu'un seul chantier et un seul devis.
+            <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                SYMBIOZ intervient dans tous les corps de métier du second œuvre,
+                pour les particuliers comme pour les professionnels de l'agglomération toulousaine.
             </p>
-            <a href="{{ route('front.quote-request.create') }}"
-               class="mt-8 inline-flex items-center justify-center rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                Demander un devis gratuit →
-            </a>
         </div>
     </section>
 
-    {{-- Liste détaillée des 5 métiers (pilotée par l'enum) --}}
-    <section class="py-16">
-        <div class="mx-auto max-w-6xl space-y-12 px-4 lg:px-8">
-            @foreach ($services as $service)
-                <article class="grid grid-cols-1 items-center gap-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:grid-cols-2 md:gap-12 md:p-8">
-                    {{-- Visuel (placeholder tant que les photos ne sont pas déposées) --}}
-                    <div class="flex h-56 items-center justify-center rounded-xl bg-slate-100 text-6xl {{ $loop->even ? 'md:order-2' : '' }}"
-                         aria-hidden="true">
-                        {{ $service->icon() }}
-                    </div>
-
-                    {{-- Contenu --}}
-                    <div class="{{ $loop->even ? 'md:order-1' : '' }}">
-                        <p class="text-xs font-semibold uppercase tracking-wider text-indigo-600">
-                            {{ $service->label() }}
-                        </p>
-                        <h2 class="mt-1 text-2xl font-bold tracking-tight text-slate-900">
-                            {{ $service->tagline() }}
-                        </h2>
-                        <p class="mt-3 text-slate-600">{{ $service->description() }}</p>
-
-                        <ul class="mt-5 space-y-2">
-                            @foreach ($service->prestations() as $prestation)
-                                <li class="flex items-start gap-2 text-sm text-slate-700">
-                                    <svg class="mt-0.5 h-4 w-4 shrink-0 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" /></svg>
-                                    {{ $prestation }}
-                                </li>
-                            @endforeach
-                        </ul>
-
-                        <a href="{{ route('front.quote-request.create') }}"
-                           class="mt-6 inline-flex items-center text-sm font-semibold text-indigo-600 hover:text-indigo-700">
-                            Demander un devis {{ $service->label() }} →
+    {{-- ===== GRILLE SERVICES ===== --}}
+    <section class="bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach ($services as $service)
+                    @php $m = $meta[$service->slug] ?? ['desc' => 'Intervention soignée par nos compagnons qualifiés.', 'icon' => 'M5 13l4 4L19 7']; @endphp
+                    <div class="group bg-white rounded-2xl border border-gray-200 p-8 hover:border-brand hover:shadow-lg transition">
+                        <div class="w-12 h-12 rounded-xl bg-brand-light flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="{{ $m['icon'] }}"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-bold mb-3">{{ $service->name }}</h2>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-6">{{ $m['desc'] }}</p>
+                        <a href="{{ route('front.quote.create') }}"
+                           class="text-brand font-semibold text-sm group-hover:underline">
+                            Demander un devis →
                         </a>
                     </div>
-                </article>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </section>
 
-    {{-- CTA final --}}
-    <section class="bg-slate-900">
-        <div class="mx-auto max-w-4xl px-4 py-16 text-center lg:px-8">
-            <h2 class="text-3xl font-bold tracking-tight text-white">Un projet multi-travaux ?</h2>
-            <p class="mx-auto mt-4 max-w-xl text-slate-300">
-                On coordonne tous les corps d'état avec un seul interlocuteur.
-                Décrivez votre projet, on vous rappelle sous 48h.
+    {{-- ===== BANDEAU RÉASSURANCE ===== --}}
+    <section class="bg-white border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+                <div>
+                    <h3 class="font-bold mb-1">Devis gratuit</h3>
+                    <p class="text-sm text-gray-600">Réponse sous 48h ouvrées, sans engagement.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-1">Compagnons qualifiés</h3>
+                    <p class="text-sm text-gray-600">Salariés, assurés et formés à nos exigences.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-1">Travail garanti</h3>
+                    <p class="text-sm text-gray-600">Respect des normes et des délais annoncés.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ===== CTA ===== --}}
+    <section class="bg-brand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Besoin d'une intervention ?</h2>
+            <p class="mt-3 text-brand-light max-w-xl mx-auto">
+                Décrivez votre projet, nous vous recontactons sous 48h avec un devis détaillé.
             </p>
-            <a href="{{ route('front.quote-request.create') }}"
-               class="mt-8 inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-700">
-                Décrire mon projet →
-            </a>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{{ route('front.quote.create') }}"
+                   class="inline-flex items-center justify-center px-6 py-3.5 bg-white text-brand font-semibold rounded-xl hover:bg-gray-100 transition">
+                    Demander un devis gratuit
+                </a>
+                <a href="{{ route('front.quick.create') }}"
+                   class="inline-flex items-center justify-center px-6 py-3.5 border border-white/40 text-white font-semibold rounded-xl hover:border-white transition">
+                    Intervention urgente
+                </a>
+            </div>
         </div>
     </section>
 
