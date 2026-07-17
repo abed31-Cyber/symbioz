@@ -15,7 +15,7 @@ return new class extends Migration
             $table->enum('status', ['open', 'in_progress', 'closed'])->default('open');
             $table->timestamps();
 
-            $table->index('status', 'idx_status');
+           $table->index('status', 'projects_status_index');
         });
     }
 

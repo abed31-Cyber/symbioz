@@ -1,5 +1,5 @@
 @extends('layouts.public')
-@include('front.errors.404')
+
 @section('title', 'Page introuvable — SYMBIOZ')
 
 @section('content')
