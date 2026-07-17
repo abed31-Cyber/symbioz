@@ -6,6 +6,7 @@ use App\Enums\ClientStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Client (particulier ou professionnel).
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Client extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'first_name',
@@ -50,5 +51,13 @@ class Client extends Model
     public function getFullNameAttribute(): string
     {
         return trim("{$this->first_name} {$this->last_name}");
+    }
+    /**
+     * Adresse email utilisée par le canal mail des notifications.
+     * Pour que la notification mail trouve l'adresse du client,
+     */
+    public function routeNotificationForMail(): ?string
+    {
+        return $this->email;
     }
 }

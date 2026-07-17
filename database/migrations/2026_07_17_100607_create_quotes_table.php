@@ -19,9 +19,8 @@ return new class extends Migration
             $table->enum('status', ['draft', 'sent', 'accepted', 'refused', 'paid'])->default('draft');
             $table->dateTime('sent_at')->nullable();
             $table->timestamps();
-
-            $table->index('status', 'idx_status');
-            $table->index('sent_at', 'idx_sent_at');
+            $table->index('status', 'quotes_status_index');
+            $table->index('sent_at', 'quotes_sent_at_index');
         });
     }
 

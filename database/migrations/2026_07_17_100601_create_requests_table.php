@@ -30,10 +30,10 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index('status', 'idx_status');
-            $table->index('is_quick', 'idx_is_quick');
-            $table->index('is_archived', 'idx_is_archived');
-            $table->index('created_at', 'idx_created_at');
+            $table->index('status', 'requests_status_index');
+            $table->index('is_quick', 'requests_is_quick_index');
+            $table->index('is_archived', 'requests_is_archived_index');
+            $table->index('created_at', 'requests_created_at_index');
         });
     }
 
