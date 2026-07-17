@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notification;
  * Notifie l'admin de l'arrivée d'une nouvelle demande.
  * Envoyée sur le canal mail, à chaque soumission (devis ou urgence).
  */
-class NewRequestNotification extends Notification
+class NewRequestNotifications extends Notification
 {
     use Queueable;
 
