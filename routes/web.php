@@ -23,8 +23,17 @@ Route::name('front.')->group(function () {
     Route::get('/devis/confirmation', [RequestController::class, 'confirmationQuote'])
         ->name('quote.confirmation');
 
-    /* ---------- Demande urgente (Sprint 2 — placeholder) ---------- */
-    Route::get('/urgence', fn () => abort(404))->name('quick.create');
+    /* ---------- Demande urgente (Sprint 2 sa) ---------- */
+
+Route::get('/urgence', [RequestController::class, 'createQuick'])
+    ->name('quick.create');
+
+Route::post('/urgence', [RequestController::class, 'storeQuick'])
+    ->middleware('throttle:10,1')
+    ->name('quick.store');
+
+Route::get('/urgence/confirmation', [RequestController::class, 'confirmationQuick'])
+    ->name('quick.confirmation');
 });
 
 /*
