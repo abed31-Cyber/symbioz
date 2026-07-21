@@ -35,9 +35,10 @@ class StoreQuickRequest extends FormRequest
     {
         return [
             // Identité minimale du prospect pressé
-            'name'  => ['required', 'string', 'max:255'],
+            'first_name' => ['nullable', 'string', 'max:255'],
+            'last_name'  => ['required', 'string', 'max:255'],
 
-            // Téléphone : format souple, au moins 10 chiffres réels (RG-8, canal principal)
+            // Téléphone : format souple, au moins 10 caractères (canal principal)
             'phone' => ['required', 'string', 'min:10', 'max:20'],
 
             // Email réellement optionnel (RG-8) ; validé RFC seulement s'il est fourni
@@ -68,7 +69,7 @@ class StoreQuickRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required'        => 'Merci d’indiquer votre nom.',
+            'last_name.required'   => 'Merci d’indiquer votre nom ou votre raison sociale.',
             'phone.required'       => 'Le téléphone est indispensable pour vous rappeler.',
             'phone.min'            => 'Le numéro de téléphone doit contenir au moins 10 chiffres.',
             'email.email'          => 'L’adresse email n’est pas valide.',
