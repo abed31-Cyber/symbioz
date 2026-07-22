@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\DashboardService;
 use Illuminate\View\View;
 
 /**
  * Tableau de bord administrateur.
- * Les KPI seront ajoutés au Sprint 3 (US-3.2).
  */
 class DashboardController extends Controller
 {
+    public function __construct(private readonly DashboardService $dashboardService)
+    {
+    }
+
     public function index(): View
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard', $this->dashboardService->kpis());
     }
 }
