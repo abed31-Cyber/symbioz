@@ -15,6 +15,11 @@ export default {
                     light: '#EEF0FE',
                     dark: '#3B0FA0',
                 },
+                admin: {
+                    DEFAULT: '#1E3A8A',
+                    light: '#FEEDE6',
+                    dark: '#1E306E',
+                },
                 accent: '#F5500A',
             },
             fontFamily: {

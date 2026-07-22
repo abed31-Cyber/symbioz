@@ -10,66 +10,72 @@
 
     {{-- ===== SIDEBAR ===== --}}
     <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
-           class="fixed inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-200 transition-transform lg:translate-x-0">
+           class="fixed inset-y-0 left-0 z-40 w-64 bg-slate-900 transition-transform lg:translate-x-0">
 
-        <div class="h-16 flex items-center px-6 border-b border-gray-200">
-            <a href="{{ route('admin.dashboard') }}" class="text-xl font-extrabold tracking-tight">symbioz.</a>
+        <div class="h-16 flex items-center px-6">
+            <a href="{{ route('admin.dashboard') }}" class="text-xl font-extrabold tracking-tight text-white">
+                symbioz<span class="text-accent">.</span>
+            </a>
         </div>
 
-        <nav class="p-4 space-y-1">
+        {{-- Utilisateur connecté --}}
+        <div class="mx-4 mb-6 flex items-center gap-3 rounded-xl bg-slate-800 px-4 py-3">
+            <div class="w-9 h-9 rounded-full bg-admin flex items-center justify-center text-white text-xs font-bold">
+                {{ Str::substr(auth()->user()?->name ?? '?', 0, 2) }}
+            </div>
+            <div class="min-w-0">
+                <p class="text-sm font-semibold text-white truncate">{{ auth()->user()?->name }}</p>
+                <p class="text-xs text-slate-400">Gérant SYMBIOZ</p>
+            </div>
+        </div>
+
+        <nav class="px-4 space-y-1">
+            <p class="px-4 pb-2 text-xs font-semibold uppercase tracking-widest text-slate-500">Pilotage</p>
+
             <a href="{{ route('admin.dashboard') }}"
                class="block px-4 py-2.5 rounded-lg text-sm font-medium transition
-                      {{ request()->routeIs('admin.dashboard') ? 'bg-brand-light text-brand-dark' : 'text-gray-600 hover:bg-gray-100' }}">
+                      {{ request()->routeIs('admin.dashboard') ? 'bg-slate-800 text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
                 Tableau de bord
             </a>
 
-            @if (Route::has('admin.requests.index'))
-                <a href="{{ route('admin.requests.index') }}"
-                   class="block px-4 py-2.5 rounded-lg text-sm font-medium transition
-                          {{ request()->routeIs('admin.requests.*') ? 'bg-brand-light text-brand-dark' : 'text-gray-600 hover:bg-gray-100' }}">
-                    Demandes
-                </a>
-            @else
-                <span class="block px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 cursor-not-allowed">Demandes</span>
-            @endif
+            @foreach ([
+                'admin.requests.index' => 'Demandes',
+                'admin.clients.index'  => 'Clients',
+                'admin.projects.index' => 'Chantiers',
+                'admin.archives.index' => 'Archives',
+            ] as $route => $label)
+                @if (Route::has($route))
+                    <a href="{{ route($route) }}"
+                       class="block px-4 py-2.5 rounded-lg text-sm font-medium transition
+                              {{ request()->routeIs(Str::before($route, '.index') . '.*') ? 'bg-slate-800 text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+                        {{ $label }}
+                    </a>
+                @else
+                    <span class="block px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 cursor-not-allowed">
+                        {{ $label }}
+                    </span>
+                @endif
+            @endforeach
 
-            @if (Route::has('admin.clients.index'))
-                <a href="{{ route('admin.clients.index') }}"
-                   class="block px-4 py-2.5 rounded-lg text-sm font-medium transition
-                          {{ request()->routeIs('admin.clients.*') ? 'bg-brand-light text-brand-dark' : 'text-gray-600 hover:bg-gray-100' }}">
-                    Clients
-                </a>
-            @else
-                <span class="block px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 cursor-not-allowed">Clients</span>
-            @endif
-
-            @if (Route::has('admin.projects.index'))
-                <a href="{{ route('admin.projects.index') }}"
-                   class="block px-4 py-2.5 rounded-lg text-sm font-medium transition
-                          {{ request()->routeIs('admin.projects.*') ? 'bg-brand-light text-brand-dark' : 'text-gray-600 hover:bg-gray-100' }}">
-                    Chantiers
-                </a>
-            @else
-                <span class="block px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 cursor-not-allowed">Chantiers</span>
-            @endif
-
-            @if (Route::has('admin.archives.index'))
-                <a href="{{ route('admin.archives.index') }}"
-                   class="block px-4 py-2.5 rounded-lg text-sm font-medium transition
-                          {{ request()->routeIs('admin.archives.*') ? 'bg-brand-light text-brand-dark' : 'text-gray-600 hover:bg-gray-100' }}">
-                    Archives
-                </a>
-            @else
-                <span class="block px-4 py-2.5 rounded-lg text-sm font-medium text-gray-300 cursor-not-allowed">Archives</span>
-            @endif
+            <p class="px-4 pt-6 pb-2 text-xs font-semibold uppercase tracking-widest text-slate-500">Compte</p>
 
             @if (Route::has('profile.edit'))
                 <a href="{{ route('profile.edit') }}"
                    class="block px-4 py-2.5 rounded-lg text-sm font-medium transition
-                          {{ request()->routeIs('profile.*') ? 'bg-brand-light text-brand-dark' : 'text-gray-600 hover:bg-gray-100' }}">
+                          {{ request()->routeIs('profile.*') ? 'bg-slate-800 text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
                     Paramètres
                 </a>
             @endif
+
+            <div class="pt-4 mt-4 border-t border-slate-800">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit"
+                            class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-red-400 hover:bg-slate-800 transition">
+                        Déconnexion
+                    </button>
+                </form>
+            </div>
         </nav>
     </aside>
 
@@ -79,23 +85,11 @@
 
     {{-- ===== CONTENU ===== --}}
     <div class="lg:pl-64">
-
-        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 sm:px-6">
+<header class="h-16 bg-white border-b border-gray-200 flex items-center px-4 sm:px-6">
             <button @click="sidebarOpen = !sidebarOpen" class="lg:hidden p-2 -ml-2 text-gray-500">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
-
-            <div class="flex items-center gap-4 ml-auto">
-                <span class="text-sm text-gray-600">{{ auth()->user()?->name }}</span>
-
-                {{-- Déconnexion en POST : modifie l'état de session, protégée par CSRF --}}
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="text-sm font-medium text-gray-500 hover:text-gray-900">
-                        Déconnexion
-                    </button>
-                </form>
-            </div>
+            <span class="text-xl font-extrabold tracking-tight ml-2 lg:ml-0">symbioz<span class="text-accent">.</span></span>
         </header>
 
         <main class="p-4 sm:p-6 lg:p-8">
