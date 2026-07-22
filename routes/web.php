@@ -36,6 +36,17 @@ Route::get('/urgence/confirmation', [RequestController::class, 'confirmationQuic
     ->name('quick.confirmation');
 });
 
+/*------------ADmin------------------- <epic4--**/
+
+
+Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+
 /*
 |--------------------------------------------------------------------------
 | Routes auth (Breeze)
