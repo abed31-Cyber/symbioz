@@ -5,11 +5,7 @@
 @section('title', 'Tableau de bord')
 
 @section('content')
-{{-- TEMPORAIRE — contrôle visuel PriorityBadge, à supprimer avant commit --}}
-<div class="mb-6 flex gap-2">
-    <x-priority-badge :priority="\App\Enums\RequestPriority::URGENT" />
-    <x-priority-badge :priority="\App\Enums\RequestPriority::NORMAL" />
-</div>
+
 
 <div class="space-y-6">
 
