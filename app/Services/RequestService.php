@@ -139,4 +139,13 @@ class RequestService
                 : null,
         ]);
     }
+    /**
+     * Archive une demande (soft delete — RG-3).
+     * deleted_at est renseigné ; la demande sort des listes actives
+     * mais reste récupérable (restore) ou supprimable définitivement (forceDelete).
+     */
+    public function archive(RequestModel $requestModel): void
+    {
+        $requestModel->delete(); // SoftDeletes → remplit deleted_at, ne détruit pas la ligne
+    }
 }

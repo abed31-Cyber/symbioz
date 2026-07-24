@@ -54,4 +54,15 @@ class RequestController extends Controller
             ->route('admin.requests.show', $requestModel)
             ->with('success', 'Demande mise à jour.');
     }
+    /**
+     * Archive une demande puis renvoie vers la liste (RG-3).
+     */
+    public function archive(RequestModel $requestModel, RequestService $service): RedirectResponse
+    {
+        $service->archive($requestModel);
+
+        return redirect()
+            ->route('admin.requests.index')
+            ->with('success', 'Demande archivée.');
+    }
 }

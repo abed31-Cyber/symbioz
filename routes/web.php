@@ -52,6 +52,7 @@ Route::middleware('auth')
         Route::get('/clients/{client}', [ClientController::class, 'show'])->name('clients.show');
         Route::get('/demandes/{requestModel}', [AdminRequestController::class, 'show'])->name('requests.show');
         Route::patch('/demandes/{requestModel}', [AdminRequestController::class, 'update'])->name('requests.update');
+        Route::delete('/demandes/{requestModel}', [AdminRequestController::class, 'archive'])->name('requests.archive');
     });
 
 
