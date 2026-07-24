@@ -49,6 +49,7 @@ Route::middleware('auth')
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/demandes', [AdminRequestController::class, 'index'])->name('requests.index');
         Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+        Route::get('/clients/{client}', [ClientController::class, 'show'])->name('clients.show');
     });
 
 

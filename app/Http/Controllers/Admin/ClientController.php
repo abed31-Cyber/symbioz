@@ -23,4 +23,16 @@ class ClientController extends Controller
 
         return view('admin.clients.index', ['clients' => $clients]);
     }
+    /**
+     * Fiche client : coordonnées + historique complet des demandes (maquette 14).
+     */
+    public function show(Client $client): View
+    {
+        // Route model binding : Laravel résout {client} en instance, ou 404 automatique.
+        $client->load([
+            'requests' => fn ($query) => $query->with('services')->latest(),
+        ]);
+
+        return view('admin.clients.show', ['client' => $client]);
+    }
 }
