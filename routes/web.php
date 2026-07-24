@@ -4,6 +4,7 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\RequestController;
 use App\Http\Controllers\Front\ServiceController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ArchiveController;
 use App\Http\Controllers\Admin\RequestController as AdminRequestController;
 use App\Http\Controllers\Admin\ClientController;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,11 @@ Route::middleware('auth')
         Route::get('/demandes/{requestModel}', [AdminRequestController::class, 'show'])->name('requests.show');
         Route::patch('/demandes/{requestModel}', [AdminRequestController::class, 'update'])->name('requests.update');
         Route::delete('/demandes/{requestModel}', [AdminRequestController::class, 'archive'])->name('requests.archive');
+
+
+        Route::get('/archives', [ArchiveController::class, 'index'])->name('archives.index');
+        Route::patch('/archives/{id}/restore', [ArchiveController::class, 'restore'])->name('archives.restore');
+        Route::delete('/archives/{id}', [ArchiveController::class, 'destroy'])->name('archives.destroy');
     });
 
 

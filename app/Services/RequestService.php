@@ -148,4 +148,20 @@ class RequestService
     {
         $requestModel->delete(); // SoftDeletes → remplit deleted_at, ne détruit pas la ligne
     }
+    /**
+     * Restaure une demande archivée : deleted_at repasse à null (RG-4).
+     */
+    public function restore(RequestModel $requestModel): void
+    {
+        $requestModel->restore();
+    }
+
+    /**
+     * Supprime physiquement une demande et ses dépendances (RG-4, irréversible).
+     * Le pivot request_service et les photos partent en cascade (ON DELETE CASCADE, MPD).
+     */
+    public function forceDelete(RequestModel $requestModel): void
+    {
+        $requestModel->forceDelete();
+    }
 }
