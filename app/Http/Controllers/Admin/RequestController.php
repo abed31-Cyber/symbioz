@@ -30,4 +30,14 @@ class RequestController extends Controller
             'services' => Service::orderBy('name')->get(),  // alimente le dropdown de filtre
         ]);
     }
+    /**
+     * Fiche détail d'une demande en lecture seule (maquette 07, RG-1).
+     */
+    public function show(RequestModel $request): View
+    {
+        // Route model binding : {request} → instance, ou 404 automatique.
+        $request->load(['client', 'services', 'photos']);
+
+        return view('admin.requests.show', ['requestModel' => $request]);
+    }
 }
