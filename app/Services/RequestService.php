@@ -110,15 +110,25 @@ class RequestService
         }
     }
 
-    /**
-     * Génère une référence unique de type REF-0042.
-     * withTrashed() inclut les demandes soft-deleted pour ne jamais réutiliser un numéro.
+  /**
+     * Génère une référence unique de type REF-0051.
+     * On dérive du plus grand numéro existant (archivés inclus) plutôt que
+     * d'un COUNT : un COUNT casse dès qu'il y a un trou dans la séquence
+     * (demande supprimée définitivement, désynchronisation seed/factory).
      */
     private function generateReference(): string
     {
-        $next = RequestModel::withTrashed()->count() + 1;
+        // Dernière référence en base, soft-deleted compris, pour ne jamais réutiliser un numéro
+        $lastReference = RequestModel::withTrashed()
+            ->orderByDesc('id')
+            ->value('reference');
 
-        return 'REF-' . str_pad((string) $next, 4, '0', STR_PAD_LEFT);
+        // Extrait le numéro (REF-0050 → 50), 0 si aucune demande
+        $lastNumber = $lastReference
+            ? (int) str_replace('REF-', '', $lastReference)
+            : 0;
+
+        return 'REF-' . str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
     }
     /**
      * Met à jour le pilotage d'une demande : statut, priorité, notes internes.
