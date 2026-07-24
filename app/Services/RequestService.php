@@ -110,14 +110,68 @@ class RequestService
         }
     }
 
-    /**
-     * Génère une référence unique de type REF-0042.
-     * withTrashed() inclut les demandes soft-deleted pour ne jamais réutiliser un numéro.
+  /**
+     * Génère une référence unique de type REF-0051.
+     * On dérive du plus grand numéro existant (archivés inclus) plutôt que
+     * d'un COUNT : un COUNT casse dès qu'il y a un trou dans la séquence
+     * (demande supprimée définitivement, désynchronisation seed/factory).
      */
     private function generateReference(): string
     {
-        $next = RequestModel::withTrashed()->count() + 1;
+        // Dernière référence en base, soft-deleted compris, pour ne jamais réutiliser un numéro
+        $lastReference = RequestModel::withTrashed()
+            ->orderByDesc('id')
+            ->value('reference');
 
-        return 'REF-' . str_pad((string) $next, 4, '0', STR_PAD_LEFT);
+        // Extrait le numéro (REF-0050 → 50), 0 si aucune demande
+        $lastNumber = $lastReference
+            ? (int) str_replace('REF-', '', $lastReference)
+            : 0;
+
+        return 'REF-' . str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+    }
+    /**
+     * Met à jour le pilotage d'une demande : statut, priorité, notes internes.
+     * RG-2 : si le statut n'est plus « perdu », on efface la raison de clôture
+     * pour ne pas laisser une raison orpheline.
+     *
+     * @param array<string, mixed> $data données déjà validées par UpdateRequestRequest
+     */
+    public function updateStatus(RequestModel $requestModel, array $data): void
+    {
+        $requestModel->update([
+            'status'         => $data['status'],
+            'priority'       => $data['priority'],
+            'admin_notes'    => $data['admin_notes'] ?? null,
+            // La raison n'a de sens que si la demande est perdue.
+            'closing_reason' => $data['status'] === RequestStatus::PERDU->value
+                ? $data['closing_reason']
+                : null,
+        ]);
+    }
+    /**
+     * Archive une demande (soft delete — RG-3).
+     * deleted_at est renseigné ; la demande sort des listes actives
+     * mais reste récupérable (restore) ou supprimable définitivement (forceDelete).
+     */
+    public function archive(RequestModel $requestModel): void
+    {
+        $requestModel->delete(); // SoftDeletes → remplit deleted_at, ne détruit pas la ligne
+    }
+    /**
+     * Restaure une demande archivée : deleted_at repasse à null (RG-4).
+     */
+    public function restore(RequestModel $requestModel): void
+    {
+        $requestModel->restore();
+    }
+
+    /**
+     * Supprime physiquement une demande et ses dépendances (RG-4, irréversible).
+     * Le pivot request_service et les photos partent en cascade (ON DELETE CASCADE, MPD).
+     */
+    public function forceDelete(RequestModel $requestModel): void
+    {
+        $requestModel->forceDelete();
     }
 }
