@@ -60,4 +60,18 @@ class Client extends Model
     {
         return $this->email;
     }
+
+    /**
+     * Recherche un client par nom, prénom ou ville.
+     */
+    public function scopeSearch($query, ?string $term): void
+    {
+        $query->when(
+            $term,
+            fn($q) => $q
+                ->where('last_name', 'like', "%{$term}%")
+                ->orWhere('first_name', 'like', "%{$term}%")
+                ->orWhere('city', 'like', "%{$term}%")
+        );
+    }
 }

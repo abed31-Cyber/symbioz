@@ -5,6 +5,7 @@ use App\Http\Controllers\Front\RequestController;
 use App\Http\Controllers\Front\ServiceController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RequestController as AdminRequestController;
+use App\Http\Controllers\Admin\ClientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,7 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/demandes', [AdminRequestController::class, 'index'])->name('requests.index');
+        Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
     });
 
 
