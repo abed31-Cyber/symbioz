@@ -50,7 +50,8 @@ Route::middleware('auth')
         Route::get('/demandes', [AdminRequestController::class, 'index'])->name('requests.index');
         Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
         Route::get('/clients/{client}', [ClientController::class, 'show'])->name('clients.show');
-        Route::get('/demandes/{request}', [AdminRequestController::class, 'show'])->name('requests.show');
+        Route::get('/demandes/{requestModel}', [AdminRequestController::class, 'show'])->name('requests.show');
+        Route::patch('/demandes/{requestModel}', [AdminRequestController::class, 'update'])->name('requests.update');
     });
 
 

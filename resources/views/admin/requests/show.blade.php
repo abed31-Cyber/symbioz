@@ -77,6 +77,80 @@
             </section>
 
             {{-- Emplacement du formulaire de statut (US-4.2) --}}
+            {{-- Pilotage : statut, priorité, notes (RG-2, RG-11) --}}
+            <section class="rounded-xl border border-slate-200 bg-white p-6"
+                     x-data="{ status: '{{ old('status', $requestModel->status->value) }}' }">
+                <h2 class="text-lg font-bold text-slate-900">Pilotage de la demande</h2>
+
+                @if (session('success'))
+                    <div class="mt-3 rounded-lg bg-green-50 px-4 py-2 text-sm font-medium text-green-700">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('admin.requests.update', $requestModel) }}" class="mt-4 space-y-4">
+                    @csrf
+                    @method('PATCH')
+
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        {{-- Statut --}}
+                        <div>
+                            <label for="status" class="block text-sm font-medium text-slate-700">Statut</label>
+                            <select name="status" id="status" x-model="status"
+                                    class="mt-1 w-full rounded-lg border-slate-300 text-sm focus:border-admin focus:ring-admin">
+                                @foreach (\App\Enums\RequestStatus::cases() as $status)
+                                    <option value="{{ $status->value }}" @selected(old('status', $requestModel->status->value) === $status->value)>
+                                        {{ $status->label() }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('status') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                        </div>
+
+                        {{-- Priorité (RG-11 : modifiable) --}}
+                        <div>
+                            <label for="priority" class="block text-sm font-medium text-slate-700">Priorité</label>
+                            <select name="priority" id="priority"
+                                    class="mt-1 w-full rounded-lg border-slate-300 text-sm focus:border-admin focus:ring-admin">
+                                @foreach (\App\Enums\RequestPriority::cases() as $priority)
+                                    <option value="{{ $priority->value }}" @selected(old('priority', $requestModel->priority->value) === $priority->value)>
+                                        {{ $priority->label() }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('priority') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+
+                    {{-- Raison de clôture : visible seulement si statut = perdu (RG-2) --}}
+                    <div x-show="status === '{{ \App\Enums\RequestStatus::PERDU->value }}'" x-cloak>
+                        <label for="closing_reason" class="block text-sm font-medium text-slate-700">
+                            Raison de la perte <span class="text-red-600">*</span>
+                        </label>
+                        <input type="text" name="closing_reason" id="closing_reason"
+                               value="{{ old('closing_reason', $requestModel->closing_reason) }}"
+                               placeholder="Ex. budget trop élevé, a choisi un concurrent…"
+                               class="mt-1 w-full rounded-lg border-slate-300 text-sm focus:border-admin focus:ring-admin">
+                        @error('closing_reason') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                    </div>
+
+                    {{-- Notes internes (dont RDV téléphonique — ADR-011) --}}
+                    <div>
+                        <label for="admin_notes" class="block text-sm font-medium text-slate-700">
+                            Notes internes
+                        </label>
+                        <textarea name="admin_notes" id="admin_notes" rows="4"
+                                  placeholder="Compte-rendu d'appel, RDV convenu par téléphone, remarques…"
+                                  class="mt-1 w-full rounded-lg border-slate-300 text-sm focus:border-admin focus:ring-admin">{{ old('admin_notes', $requestModel->admin_notes) }}</textarea>
+                        @error('admin_notes') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                    </div>
+
+                    <button type="submit"
+                            class="rounded-lg bg-admin px-5 py-2.5 text-sm font-semibold text-white hover:bg-admin-dark">
+                        Enregistrer
+                    </button>
+                </form>
+            </section>
             {{-- À venir : changement de statut/priorité + notes internes --}}
 
         </div>

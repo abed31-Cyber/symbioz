@@ -120,4 +120,23 @@ class RequestService
 
         return 'REF-' . str_pad((string) $next, 4, '0', STR_PAD_LEFT);
     }
+    /**
+     * Met à jour le pilotage d'une demande : statut, priorité, notes internes.
+     * RG-2 : si le statut n'est plus « perdu », on efface la raison de clôture
+     * pour ne pas laisser une raison orpheline.
+     *
+     * @param array<string, mixed> $data données déjà validées par UpdateRequestRequest
+     */
+    public function updateStatus(RequestModel $requestModel, array $data): void
+    {
+        $requestModel->update([
+            'status'         => $data['status'],
+            'priority'       => $data['priority'],
+            'admin_notes'    => $data['admin_notes'] ?? null,
+            // La raison n'a de sens que si la demande est perdue.
+            'closing_reason' => $data['status'] === RequestStatus::PERDU->value
+                ? $data['closing_reason']
+                : null,
+        ]);
+    }
 }
