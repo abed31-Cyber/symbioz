@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,11 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {
-        //
+{
+    // Railway sert l'app derrière un proxy HTTPS : sans ça, Laravel génère
+    // des URLs en http:// et le navigateur bloque les assets (mixed content).
+    if ($this->app->environment('production')) {
+        URL::forceScheme('https');
     }
+}
 }
