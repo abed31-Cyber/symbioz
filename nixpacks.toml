@@ -1,0 +1,15 @@
+# Configuration du build Railway (Nixpacks)
+# Force l'installation de Node et la compilation des assets front (Vite + Tailwind),
+# que Nixpacks n'exécute pas par défaut sur un projet détecté comme PHP.
+
+[phases.setup]
+nixPkgs = ['...', 'nodejs_20']
+
+[phases.install]
+cmds = [
+    'composer install --no-dev --optimize-autoloader --no-interaction',
+    'npm ci'
+]
+
+[phases.build]
+cmds = ['npm run build']
