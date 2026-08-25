@@ -164,15 +164,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
             <div class="lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center">
                 <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500 text-white text-xs font-semibold mb-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-700 text-white text-xs font-semibold mb-4">
                         Intervention rapide
                     </div>
                     <h2 class="text-3xl font-extrabold text-white">Une fuite ? Une panne ? Une urgence ?</h2>
-                    <p class="mt-4 text-red-100 max-w-lg">
+                    <p class="mt-4 text-white max-w-lg">
                         Dépannage express pour les particuliers et professionnels.
                         Décrivez votre situation, nous vous rappelons sous 2h.
                     </p>
-                    <ul class="mt-6 space-y-2 text-red-50 text-sm">
+                    <ul class="mt-6 space-y-2 text-white text-sm">
                         <li class="flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                             Rappel sous 2h en journée

@@ -76,7 +76,7 @@
 
                 {{-- Col 2 : Services --}}
                 <div>
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Nos services</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">Nos services</h3>
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('front.services') }}" class="hover:text-white transition">Plomberie</a></li>
                         <li><a href="{{ route('front.services') }}" class="hover:text-white transition">Électricité</a></li>
